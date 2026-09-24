@@ -12,8 +12,8 @@ export const INITIAL_PROFILE: UserProfile = {
   performanceScore: "Core Web Vitals focused",
   email: "alex.dev@example.com",
   location: "Jakarta, Indonesia",
-  githubUrl: "https://github.com",
-  linkedinUrl: "https://linkedin.com",
+  githubUrl: "https://github.com/mfalfi02",
+  linkedinUrl: "https://www.linkedin.com/in/muhammad-alfi-98a22a304/",
   twitterUrl: "https://www.instagram.com/mfalfi_?stkn=NHR1MXhsNTYxYjFz",
 };
 
