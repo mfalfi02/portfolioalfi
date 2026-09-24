@@ -1,0 +1,74 @@
+{
+  "profile": {
+    "name": "Muhammad Fatkhul Alfi",
+    "fullName": "Muhammad Fatkhul Alfi",
+    "roleTitle": "Website Developer",
+    "hireStatus": "Available for freelance and full-time roles",
+    "heroBio": "I am a student with a strong interest in information technology, particularly web application development. I actively develop various projects using technologies such as Laravel, PHP, and React. Currently, I am also focusing on developing a Progressive Web Application (PWA)-based Information System as part of my final project. Beyond academics, I enjoy learning new technologies, turning ideas into applications, and continuously improving my programming skills.\n",
+    "yearsExp": "0",
+    "projectsCompleted": "5+",
+    "performanceScore": "Web Development",
+    "email": "mfalfi02@gmail.com",
+    "location": "Pontianak, Indonesia (remote available)",
+    "githubUrl": "https://github.com",
+    "linkedinUrl": "https://linkedin.com",
+    "twitterUrl": "https://www.instagram.com/mfalfi_?stkn=NHR1MXhsNTYxYjFz"
+  },
+  "projects": [
+    {
+      "id": "1787715591466",
+      "title": "AutoDecision",
+      "description": "A decision support system for selecting cars using the Simple Additive Weighting (SAW) method.",
+      "category": "Fullstack",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTv6aUMcybP8IhbbysCDEOn5XOEekm4bYZRLlkT8OEJw&s=10",
+      "tags": [
+        "Laravel"
+      ],
+      "githubUrl": "https://github.com/mfalfi02/Dss_mobilbekas.git",
+      "stars": 6,
+      "date": "2026-08"
+    },
+    {
+      "id": "1787715351169",
+      "title": "Progressive Web App-Based Faculty Leadership Office Queue System",
+      "description": "A queue management system for the faculty leadership office that uses reliable Progressive Web Application technology.",
+      "category": "Fullstack",
+      "image": "https://web.dev/static/learn/pwa/app-design/image/a-pwa-installed-microsof-2cf3d40544ce3.png?hl=id",
+      "tags": [
+        "Laravel+Vite"
+      ],
+      "githubUrl": "https://github.com/mfalfi02/antreandekanatfix.git",
+      "liveUrl": "https://siap-dek.site/",
+      "stars": 16,
+      "date": "2026-08"
+    },
+    {
+      "id": "1787715100459",
+      "title": "School Portal System",
+      "description": "A school management system with reporting, student and teacher management, scheduling, attendance, and assessment features.",
+      "category": "Fullstack",
+      "image": "https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=1200&q=80",
+      "tags": [
+        "Laravel + Vite"
+      ],
+      "githubUrl": "https://github.com/mfalfi02/Sistem-Sekolahan.git",
+      "liveUrl": "https://smtkportal.site/",
+      "stars": 14,
+      "date": "2026-08"
+    },
+    {
+      "id": "1787714896896",
+      "title": "Decision Support System for Assessing Borrower Eligibility in Credit Unions",
+      "description": "A decision support system for assessing loan eligibility using the Simple Additive Weighting (SAW) method.",
+      "category": "Fullstack",
+      "image": "https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=1200&q=80",
+      "tags": [
+        "PHP NATIVE"
+      ],
+      "githubUrl": "https://github.com/mfalfi02/Dss.Credit_Union.git",
+      "liveUrl": "https://cu-lintangtipo.site",
+      "stars": 7,
+      "date": "2026-08"
+    }
+  ]
+}
