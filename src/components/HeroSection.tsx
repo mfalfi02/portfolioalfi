@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronRight, Terminal } from 'lucide-react';
+import { ChevronRight, Eye, Terminal } from 'lucide-react';
 import { UserProfile } from '@/types';
 import ThreeHeroCanvas from '@/components/ThreeHeroCanvas';
 
@@ -40,6 +40,14 @@ export default function HeroSection({ profile }: { profile: UserProfile }) {
                 className="inline-flex items-center gap-2 rounded-full border border-fuchsia-200/20 bg-white/5 px-6 py-3.5 font-semibold text-white transition-all hover:-translate-y-1 hover:border-fuchsia-200/50 hover:bg-fuchsia-300/10"
               >
                 <Terminal className="w-4 h-4 text-emerald-300" /> Discuss a project
+              </a>
+              <a
+                href="/cv/muhammad-fatkhul-alfi.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-cyan-200/20 bg-cyan-300/10 px-6 py-3.5 font-semibold text-cyan-100 transition-all hover:-translate-y-1 hover:border-cyan-200/50 hover:bg-cyan-300/15"
+              >
+                <Eye className="h-4 w-4" /> Lihat CV
               </a>
             </div>
 
