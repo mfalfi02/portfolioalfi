@@ -16,6 +16,19 @@
   },
   "projects": [
     {
+      "id": "retail-management-system",
+      "title": "Retail Management System",
+      "description": "A modular retail operations workspace built with Next.js App Router, TypeScript, MySQL and Prisma. The current foundation includes server-side authentication, role/permission data, multi-store entities, a database-backed dashboard, and a relational schema for the core retail workflows.",
+      "category": "Fullstack",
+      "image": "/images/retail-management-system.png",
+      "tags": [
+        "Next.js"
+      ],
+      "githubUrl": "https://github.com/mfalfi02/Retail-management-System",
+      "stars": 0,
+      "date": "2026-10"
+    },
+    {
       "id": "1787715591466",
       "title": "AutoDecision",
       "description": "A decision support system for selecting cars using the Simple Additive Weighting (SAW) method.",
