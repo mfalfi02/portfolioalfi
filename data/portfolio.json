@@ -33,7 +33,7 @@
       "title": "Progressive Web App-Based Faculty Leadership Office Queue System",
       "description": "A queue management system for the faculty leadership office that uses reliable Progressive Web Application technology.",
       "category": "Fullstack",
-      "image": "https://web.dev/static/learn/pwa/app-design/image/a-pwa-installed-microsof-2cf3d40544ce3.png?hl=id",
+      "image": "/images/progressive-web-app-queue-system.png",
       "tags": [
         "Laravel+Vite"
       ],
@@ -47,7 +47,7 @@
       "title": "School Portal System",
       "description": "A school management system with reporting, student and teacher management, scheduling, attendance, and assessment features.",
       "category": "Fullstack",
-      "image": "https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=1200&q=80",
+      "image": "/images/school-portal.png",
       "tags": [
         "Laravel + Vite"
       ],
@@ -61,7 +61,7 @@
       "title": "Decision Support System for Assessing Borrower Eligibility in Credit Unions",
       "description": "A decision support system for assessing loan eligibility using the Simple Additive Weighting (SAW) method.",
       "category": "Fullstack",
-      "image": "https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=1200&q=80",
+      "image": "/images/credit-union-borrower-eligibility.png",
       "tags": [
         "PHP NATIVE"
       ],
