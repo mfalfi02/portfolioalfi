@@ -33,29 +33,29 @@ export default function Navbar({
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         scrolled
-          ? 'bg-slate-950/75 backdrop-blur-xl border-b border-white/10 py-3'
+        ? 'bg-[#10110f]/90 backdrop-blur-md border-b border-white/10 py-3'
           : 'bg-transparent py-5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         <a href="#hero" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-2xl border border-white/10 bg-white/5 backdrop-blur flex items-center justify-center transition-colors group-hover:bg-white/10">
-            <Code2 className="w-5 h-5 text-cyan-300 transition-colors group-hover:text-fuchsia-300" />
+          <div className="flex h-9 w-9 items-center justify-center bg-[var(--accent)] text-[#15170f]">
+            <Code2 className="w-4 h-4" />
           </div>
           <div>
             <span className="text-white font-semibold tracking-tight text-lg block">{profile.name}</span>
             <span className="text-[10px] text-slate-400 font-mono tracking-[0.25em] uppercase block -mt-1">
-              Web Developer
+              {profile.roleTitle}
             </span>
           </div>
         </a>
 
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-          <a href="#hero" className="hover:text-cyan-200 transition-colors">About</a>
-          <a href="#projects" className="hover:text-cyan-200 transition-colors">Portfolio</a>
-          <a href="#skills" className="hover:text-violet-200 transition-colors">Skills</a>
-          <a href="#experience" className="hover:text-fuchsia-200 transition-colors">Experience</a>
-          <a href="#contact" className="hover:text-amber-200 transition-colors">Contact</a>
+        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-[#aaa99f]">
+          <a href="#hero" className="hover:text-white transition-colors">About</a>
+          <a href="#projects" className="hover:text-white transition-colors">Work</a>
+          <a href="#skills" className="hover:text-white transition-colors">Skills</a>
+          <a href="#experience" className="hover:text-white transition-colors">Experience</a>
+          <a href="#contact" className="hover:text-white transition-colors">Contact</a>
         </nav>
 
         <div className="flex items-center gap-3">
@@ -87,7 +87,7 @@ export default function Navbar({
 
           <a
             href="#contact"
-            className="rounded-full bg-gradient-to-r from-cyan-300 to-violet-300 px-4 py-2 text-xs font-semibold text-slate-950 transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-violet-400/20"
+            className="rounded-full bg-[var(--accent)] px-4 py-2 text-xs font-semibold text-[#15170f] transition-all hover:-translate-y-0.5"
           >
             Hire me
           </a>

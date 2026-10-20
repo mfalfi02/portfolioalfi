@@ -16,6 +16,19 @@
   },
   "projects": [
     {
+      "id": "sistem-kasir-kantin-sehat",
+      "title": "Sistem Kasir Kantin Sehat",
+      "description": "A point-of-sale system for Kantin Sehat at Rumah Sakit Kartika Husada, with product browsing, category filtering, and a cart-based checkout workflow.",
+      "category": "Fullstack",
+      "image": "/images/kantin-sehat-pos.svg",
+      "tags": [
+        "Next.js"
+      ],
+      "githubUrl": "https://github.com/mfalfi02/POS-Kantin-Sehat",
+      "stars": 0,
+      "date": "2026-10"
+    },
+    {
       "id": "retail-management-system",
       "title": "Retail Management System",
       "description": "A modular retail operations workspace built with Next.js App Router, TypeScript, MySQL and Prisma. The current foundation includes server-side authentication, role/permission data, multi-store entities, a database-backed dashboard, and a relational schema for the core retail workflows.",

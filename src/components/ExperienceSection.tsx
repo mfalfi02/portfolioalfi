@@ -4,40 +4,23 @@ import { EXPERIENCES } from '@/lib/data';
 
 export default function ExperienceSection() {
   return (
-    <section id="experience" className="relative py-24">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 text-emerald-300 text-xs font-mono tracking-[0.24em] uppercase mb-2">
-            <Briefcase className="w-4 h-4" /> Experience
-          </div>
-          <h2 className="text-3xl font-semibold tracking-tight text-white">
-            My experience and focus
-          </h2>
+    <section id="experience" className="border-y border-white/10 bg-[#151612] py-24 md:py-32">
+      <div className="section-shell max-w-5xl">
+        <div className="mb-12 max-w-xl">
+          <div className="eyebrow mb-4"><Briefcase className="mr-2 inline h-4 w-4" /> 03 / Experience</div>
+          <h2 className="section-title">Learning by building and contributing.</h2>
         </div>
-
-        <div className="space-y-8 relative before:absolute before:inset-0 before:left-4 md:before:left-1/2 before:-translate-x-1/2 before:w-0.5 before:bg-white/10">
+        <div className="relative border-l border-white/10">
           {EXPERIENCES.map((exp, idx) => (
-            <div
-              key={idx}
-              className={`relative flex flex-col md:flex-row items-center ${
-                idx % 2 === 0 ? 'md:flex-row-reverse' : ''
-              }`}
-            >
-              <div className="absolute left-4 md:left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-slate-950 border border-white/15 flex items-center justify-center z-10">
-                <span className="w-2 h-2 rounded-full bg-emerald-300" />
+            <article key={idx} className="relative grid grid-cols-1 gap-3 py-7 pl-7 md:grid-cols-[180px_1fr] md:gap-10 md:pl-10">
+              <span className="absolute -left-[5px] top-9 h-2.5 w-2.5 rounded-full bg-[var(--accent)] ring-4 ring-[#151612]" />
+              <p className="pt-1 text-xs font-mono text-[var(--accent)]">{exp.period}</p>
+              <div>
+                <h3 className="text-lg font-medium text-white">{exp.role}</h3>
+                <h4 className="mb-3 mt-1 text-sm text-[#b0b0a7]">{exp.company}</h4>
+                <p className="max-w-2xl text-sm leading-7 text-[#898a81]">{exp.description}</p>
               </div>
-
-              <div className="w-full md:w-1/2 pl-12 md:pl-0 md:px-8">
-                <div className="rounded-[1.75rem] border border-white/10 bg-white/5 p-6 shadow-xl transition-colors hover:border-white/20">
-                  <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-mono text-emerald-300">
-                    {exp.period}
-                  </span>
-                  <h3 className="text-lg font-semibold text-white mt-3">{exp.role}</h3>
-                  <h4 className="text-sm font-medium text-slate-300 mb-3">{exp.company}</h4>
-                  <p className="text-sm text-slate-400 leading-7">{exp.description}</p>
-                </div>
-              </div>
-            </div>
+            </article>
           ))}
         </div>
       </div>

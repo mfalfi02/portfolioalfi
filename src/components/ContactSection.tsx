@@ -40,35 +40,31 @@ export default function ContactSection({ profile }: { profile: UserProfile }) {
   };
 
   return (
-    <section id="contact" className="relative py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-12 rounded-[2rem] border border-white/10 bg-white/5 p-8 backdrop-blur-xl md:p-12 lg:grid-cols-12">
+    <section id="contact" className="py-24 md:py-32">
+      <div className="section-shell">
+        <div className="grid grid-cols-1 gap-12 border-t border-white/10 pt-10 md:grid-cols-12 md:gap-16">
           <div className="lg:col-span-5 space-y-6">
-            <div className="inline-flex items-center gap-2 text-emerald-300 text-xs font-mono tracking-[0.24em] uppercase">
-              <Mail className="w-4 h-4" /> Contact
+            <div className="eyebrow">
+              <Mail className="mr-2 inline h-4 w-4" /> 04 / Contact
             </div>
-            <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-              Let&apos;s talk about your project
+            <h2 className="section-title mt-5">
+              Have a project in mind?
             </h2>
-            <p className="text-sm leading-7 text-slate-400">
+            <p className="section-copy mt-5 text-sm">
               If you need a more polished website, stronger performance, or new features for your portfolio, feel free to send a message.
             </p>
 
             <div className="space-y-4 pt-4">
-              <div className="flex items-center gap-4 text-slate-300">
-                <div className="p-3 rounded-2xl border border-white/10 bg-white/5 text-emerald-300">
-                  <Mail className="w-5 h-5" />
-                </div>
+              <div className="flex items-center gap-4 text-[#d0d0c8]">
+                <div className="text-[var(--accent)]"><Mail className="w-5 h-5" /></div>
                 <div>
                   <span className="text-xs uppercase tracking-[0.2em] text-slate-500 block">Email</span>
                   <span className="text-sm font-semibold">{profile.email}</span>
                 </div>
               </div>
 
-              <div className="flex items-center gap-4 text-slate-300">
-                <div className="p-3 rounded-2xl border border-white/10 bg-white/5 text-sky-300">
-                  <Globe className="w-5 h-5" />
-                </div>
+              <div className="flex items-center gap-4 text-[#d0d0c8]">
+                <div className="text-[var(--accent)]"><Globe className="w-5 h-5" /></div>
                 <div>
                   <span className="text-xs uppercase tracking-[0.2em] text-slate-500 block">Location</span>
                   <span className="text-sm font-semibold">{profile.location}</span>
@@ -99,7 +95,7 @@ export default function ContactSection({ profile }: { profile: UserProfile }) {
                       placeholder="Your name"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-3 text-sm text-slate-100 outline-none placeholder:text-slate-500 focus:border-emerald-300/40"
+                      className="w-full border border-white/10 bg-[#151612] px-4 py-3 text-sm text-white outline-none placeholder:text-[#77786f] focus:border-[var(--accent)]/60"
                     />
                   </div>
                   <div>
@@ -112,7 +108,7 @@ export default function ContactSection({ profile }: { profile: UserProfile }) {
                       placeholder="email@domain.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-3 text-sm text-slate-100 outline-none placeholder:text-slate-500 focus:border-emerald-300/40"
+                      className="w-full border border-white/10 bg-[#151612] px-4 py-3 text-sm text-white outline-none placeholder:text-[#77786f] focus:border-[var(--accent)]/60"
                     />
                   </div>
                 </div>
@@ -127,7 +123,7 @@ export default function ContactSection({ profile }: { profile: UserProfile }) {
                     placeholder="Portfolio consultation / new website inquiry"
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    className="w-full rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-3 text-sm text-slate-100 outline-none placeholder:text-slate-500 focus:border-emerald-300/40"
+                    className="w-full border border-white/10 bg-[#151612] px-4 py-3 text-sm text-white outline-none placeholder:text-[#77786f] focus:border-[var(--accent)]/60"
                   />
                 </div>
 
@@ -141,14 +137,14 @@ export default function ContactSection({ profile }: { profile: UserProfile }) {
                     placeholder="Tell me briefly about your project..."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-3 text-sm text-slate-100 outline-none placeholder:text-slate-500 focus:border-emerald-300/40"
+                    className="w-full border border-white/10 bg-[#151612] px-4 py-3 text-sm text-white outline-none placeholder:text-[#77786f] focus:border-[var(--accent)]/60"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={loading}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-5 py-3.5 font-semibold text-slate-950 transition-colors hover:bg-slate-200 disabled:cursor-not-allowed disabled:opacity-60"
+                  className="inline-flex w-full items-center justify-center gap-2 bg-[var(--accent)] px-5 py-3.5 font-semibold text-[#15170f] transition-colors hover:bg-[#d6f993] disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {loading ? (
                     <>

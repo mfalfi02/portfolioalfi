@@ -5,12 +5,12 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Muhammad Fatkhul Alfi | Web Developer Portfolio",
   description:
-    "A professional portfolio focused on frontend engineering, Next.js, design systems, and polished, fast digital products.",
+    "Portfolio of Muhammad Fatkhul Alfi, a web developer building practical web applications and digital tools.",
   keywords: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Web Developer", "Portfolio"],
   authors: [{ name: "Muhammad Fatkhul Alfi" }],
   openGraph: {
     title: "Muhammad Fatkhul Alfi | Web Developer Portfolio",
-    description: "A portfolio website focused on visual quality, performance, and maintainability.",
+    description: "Selected web applications and digital products by Muhammad Fatkhul Alfi.",
     type: "website",
   },
 };

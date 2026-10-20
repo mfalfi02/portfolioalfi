@@ -3,12 +3,12 @@ import { UserProfile } from '@/types';
 
 export default function Footer({ profile }: { profile: UserProfile }) {
   return (
-    <footer className="border-t border-white/10 py-8 text-xs text-slate-500">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <footer className="border-t border-white/10 py-8 text-xs text-[#77786f]">
+      <div className="section-shell flex flex-col items-center justify-between gap-4 sm:flex-row">
         <div>
           © {new Date().getFullYear()} {profile.name}. Built with Next.js and a lightweight backend.
         </div>
-        <div className="flex items-center gap-6 text-slate-400">
+        <div className="flex items-center gap-6 text-[#aaa99f]">
           <a href={profile.githubUrl} target="_blank" rel="noreferrer" className="hover:text-white transition-colors">
             GitHub
           </a>
