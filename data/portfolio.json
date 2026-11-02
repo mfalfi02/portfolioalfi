@@ -16,6 +16,19 @@
   },
   "projects": [
     {
+      "id": "inventori-toko-bangunan-bintang-prima",
+      "title": "Inventory Toko Bangunan",
+      "description": "An inventory system for Bintang Prima Building Supplies, designed to make incoming and outgoing stock movements more effective and efficient.",
+      "category": "Fullstack",
+      "image": "/images/inventori-toko-bangunan.svg",
+      "tags": [
+        "Laravel"
+      ],
+      "githubUrl": "https://github.com/mfalfi02/Inventori-Toko-Bangunan",
+      "stars": 0,
+      "date": "2026-11"
+    },
+    {
       "id": "sistem-kasir-kantin-sehat",
       "title": "Sistem Kasir Kantin Sehat",
       "description": "A point-of-sale system for Kantin Sehat at Rumah Sakit Kartika Husada, with product browsing, category filtering, and a cart-based checkout workflow.",
