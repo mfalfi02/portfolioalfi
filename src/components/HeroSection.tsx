@@ -24,8 +24,11 @@ export default function HeroSection({ profile }: { profile: UserProfile }) {
               <a href="#projects" className="inline-flex items-center gap-3 rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-[#15170f] transition-transform hover:-translate-y-0.5">
                 Explore my work <ArrowDownRight className="h-4 w-4" />
               </a>
-              <a href="/cv/muhammad-fatkhul-alfi.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-3 text-sm font-medium text-[#f1f0e9] transition-colors hover:border-white/40">
-                <FileText className="h-4 w-4" /> View résumé
+              <a href="/cv/muhammad-fatkhul-alfi-en.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-3 text-sm font-medium text-[#f1f0e9] transition-colors hover:border-white/40">
+                <FileText className="h-4 w-4" /> Résumé · EN
+              </a>
+              <a href="/cv/muhammad-fatkhul-alfi-id.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-3 text-sm font-medium text-[#f1f0e9] transition-colors hover:border-white/40">
+                <FileText className="h-4 w-4" /> Resume · ID
               </a>
             </div>
             <div className="flex flex-wrap gap-x-8 gap-y-3 border-t border-white/10 pt-6 text-sm text-[#a4a49a]">
