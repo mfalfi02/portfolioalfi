@@ -1,160 +1,106 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Mail, Globe, Send, CheckCircle, Loader2 } from 'lucide-react';
+import { Check, Github, Instagram, Linkedin, LoaderCircle, Mail, MapPin, Phone, Send } from 'lucide-react';
 import { UserProfile } from '@/types';
 
 export default function ContactSection({ profile }: { profile: UserProfile }) {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-  });
+  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const whatsappNumber = profile.phone.replace(/\D/g, '');
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const updateField = (field: keyof typeof formData, value: string) => {
+    setFormData((current) => ({ ...current, [field]: value }));
+    setErrorMessage('');
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     setLoading(true);
+    setErrorMessage('');
 
     try {
-      // Call the Next.js API route at /api/contact.
-      const res = await fetch('/api/contact', {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
-
-      if (res.ok) {
-        setSubmitted(true);
-        setFormData({ name: '', email: '', subject: '', message: '' });
-      }
-    } catch {
-      // Fallback
+      const result = await response.json();
+      if (!response.ok) throw new Error(result?.error ?? 'The message could not be sent. Please try again.');
       setSubmitted(true);
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : 'The message could not be sent. Please try again.');
     } finally {
       setLoading(false);
-      setTimeout(() => setSubmitted(false), 5000);
     }
   };
+
+  const inputClass = 'w-full border-b border-white/15 bg-transparent px-0 py-3 text-sm text-white outline-none placeholder:text-[#77786f] focus:border-[var(--accent)]';
 
   return (
     <section id="contact" className="py-24 md:py-32">
       <div className="section-shell">
-        <div className="grid grid-cols-1 gap-12 border-t border-white/10 pt-10 md:grid-cols-12 md:gap-16">
-          <div className="lg:col-span-5 space-y-6">
-            <div className="eyebrow">
-              <Mail className="mr-2 inline h-4 w-4" /> 04 / Contact
+        <div className="grid gap-12 border-t border-white/10 pt-9 md:grid-cols-[.8fr_1.2fr] md:gap-20 md:pt-12">
+          <div>
+            <p className="eyebrow mb-4">05 / Contact</p>
+            <h2 className="section-title max-w-md">Let&apos;s make something useful.</h2>
+            <p className="section-copy mt-5 max-w-md text-sm">For web development roles, freelance work, or a collaboration, send me a note.</p>
+
+            <div className="mt-9 space-y-5 border-t border-white/10 pt-6">
+              <a href={`mailto:${profile.email}`} className="group flex items-center gap-4 text-sm text-[#d0d0c8]">
+                <Mail className="h-4 w-4 text-[var(--accent)]" aria-hidden="true" />
+                <span className="transition-colors group-hover:text-[var(--accent)]">{profile.email}</span>
+              </a>
+              <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-4 text-sm text-[#d0d0c8]">
+                <Phone className="h-4 w-4 text-[var(--accent)]" aria-hidden="true" />
+                <span className="transition-colors group-hover:text-[var(--accent)]">WhatsApp · {profile.phone}</span>
+              </a>
+              <p className="flex items-center gap-4 text-sm text-[#a4a49a]">
+                <MapPin className="h-4 w-4 shrink-0 text-[var(--accent)]" aria-hidden="true" /> {profile.location}
+              </p>
             </div>
-            <h2 className="section-title mt-5">
-              Have a project in mind?
-            </h2>
-            <p className="section-copy mt-5 text-sm">
-              If you need a more polished website, stronger performance, or new features for your portfolio, feel free to send a message.
-            </p>
 
-            <div className="space-y-4 pt-4">
-              <div className="flex items-center gap-4 text-[#d0d0c8]">
-                <div className="text-[var(--accent)]"><Mail className="w-5 h-5" /></div>
-                <div>
-                  <span className="text-xs uppercase tracking-[0.2em] text-slate-500 block">Email</span>
-                  <span className="text-sm font-semibold">{profile.email}</span>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-4 text-[#d0d0c8]">
-                <div className="text-[var(--accent)]"><Globe className="w-5 h-5" /></div>
-                <div>
-                  <span className="text-xs uppercase tracking-[0.2em] text-slate-500 block">Location</span>
-                  <span className="text-sm font-semibold">{profile.location}</span>
-                </div>
-              </div>
+            <div className="mt-7 flex gap-5 text-xs text-[#a4a49a]">
+              <a href={profile.githubUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 hover:text-white"><Github className="h-3.5 w-3.5" /> GitHub</a>
+              <a href={profile.linkedinUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 hover:text-white"><Linkedin className="h-3.5 w-3.5" /> LinkedIn</a>
+              <a href={profile.instagramUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 hover:text-white"><Instagram className="h-3.5 w-3.5" /> Instagram</a>
             </div>
           </div>
 
-          <div className="lg:col-span-7">
+          <div>
             {submitted ? (
-              <div className="h-full flex flex-col items-center justify-center py-12 text-center rounded-3xl border border-emerald-300/20 bg-emerald-400/10 p-6">
-                <CheckCircle className="w-12 h-12 text-emerald-400 mb-3" />
-                <h3 className="text-xl font-semibold text-white">Message sent successfully</h3>
-                <p className="text-slate-300 text-sm mt-1">
-                  Thank you for getting in touch. I will reply as soon as possible.
-                </p>
+              <div role="status" className="flex min-h-64 flex-col justify-center border-y border-[var(--accent)]/40 py-8">
+                <Check className="mb-5 h-6 w-6 text-[var(--accent)]" />
+                <h3 className="text-xl font-medium text-white">Message sent.</h3>
+                <p className="mt-2 text-sm text-[#a4a49a]">Thank you for getting in touch. I&apos;ll get back to you as soon as I can.</p>
+                <button onClick={() => setSubmitted(false)} className="mt-6 w-fit text-sm text-[var(--accent)] underline underline-offset-4">Send another message</button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <form onSubmit={handleSubmit} className="space-y-7">
+                <div className="grid gap-6 sm:grid-cols-2">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-400 uppercase mb-1">
-                      Name
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      placeholder="Your name"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full border border-white/10 bg-[#151612] px-4 py-3 text-sm text-white outline-none placeholder:text-[#77786f] focus:border-[var(--accent)]/60"
-                    />
+                    <label htmlFor="contact-name" className="text-xs text-[#a4a49a]">Your name</label>
+                    <input id="contact-name" name="name" type="text" autoComplete="name" required value={formData.name} onChange={(event) => updateField('name', event.target.value)} className={inputClass} placeholder="Name" />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-slate-400 uppercase mb-1">
-                      Email *
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      placeholder="email@domain.com"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full border border-white/10 bg-[#151612] px-4 py-3 text-sm text-white outline-none placeholder:text-[#77786f] focus:border-[var(--accent)]/60"
-                    />
+                    <label htmlFor="contact-email" className="text-xs text-[#a4a49a]">Email address</label>
+                    <input id="contact-email" name="email" type="email" autoComplete="email" required value={formData.email} onChange={(event) => updateField('email', event.target.value)} className={inputClass} placeholder="you@example.com" />
                   </div>
                 </div>
-
                 <div>
-                  <label className="block text-xs font-semibold text-slate-400 uppercase mb-1">
-                    Subject
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="Portfolio consultation / new website inquiry"
-                    value={formData.subject}
-                    onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    className="w-full border border-white/10 bg-[#151612] px-4 py-3 text-sm text-white outline-none placeholder:text-[#77786f] focus:border-[var(--accent)]/60"
-                  />
+                  <label htmlFor="contact-subject" className="text-xs text-[#a4a49a]">Subject</label>
+                  <input id="contact-subject" name="subject" type="text" required value={formData.subject} onChange={(event) => updateField('subject', event.target.value)} className={inputClass} placeholder="What would you like to discuss?" />
                 </div>
-
                 <div>
-                  <label className="block text-xs font-semibold text-slate-400 uppercase mb-1">
-                    Message
-                  </label>
-                  <textarea
-                    required
-                    rows={4}
-                    placeholder="Tell me briefly about your project..."
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full border border-white/10 bg-[#151612] px-4 py-3 text-sm text-white outline-none placeholder:text-[#77786f] focus:border-[var(--accent)]/60"
-                  />
+                  <label htmlFor="contact-message" className="text-xs text-[#a4a49a]">Message</label>
+                  <textarea id="contact-message" name="message" required rows={4} value={formData.message} onChange={(event) => updateField('message', event.target.value)} className={`${inputClass} resize-y`} placeholder="A few details about the project or role..." />
                 </div>
-
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="inline-flex w-full items-center justify-center gap-2 bg-[var(--accent)] px-5 py-3.5 font-semibold text-[#15170f] transition-colors hover:bg-[#d6f993] disabled:cursor-not-allowed disabled:opacity-60"
-                >
-                  {loading ? (
-                    <>
-                      <Loader2 className="w-4 h-4 animate-spin" /> Sending...
-                    </>
-                  ) : (
-                    <>
-                      <Send className="w-4 h-4" /> Send Message
-                    </>
-                  )}
+                {errorMessage && <p role="alert" className="text-sm text-red-300">{errorMessage}</p>}
+                <button type="submit" disabled={loading} className="inline-flex items-center gap-2 bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-[#15170f] transition-colors hover:bg-[#d6f993] disabled:cursor-wait disabled:opacity-60">
+                  {loading ? <><LoaderCircle className="h-4 w-4 animate-spin" /> Sending</> : <><Send className="h-4 w-4" /> Send message</>}
                 </button>
               </form>
             )}

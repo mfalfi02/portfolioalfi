@@ -17,14 +17,12 @@ export interface UserProfile {
   roleTitle: string;
   hireStatus: string;
   heroBio: string;
-  yearsExp: string;
-  projectsCompleted: string;
-  performanceScore: string;
   email: string;
+  phone: string;
   location: string;
   githubUrl: string;
   linkedinUrl: string;
-  twitterUrl: string;
+  instagramUrl: string;
 }
 
 export interface SkillItem {
@@ -34,11 +32,4 @@ export interface SkillItem {
 export interface SkillCategory {
   name: string;
   skills: SkillItem[];
-}
-
-export interface ExperienceItem {
-  role: string;
-  company: string;
-  period: string;
-  description: string;
 }

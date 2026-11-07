@@ -2,17 +2,15 @@
   "profile": {
     "name": "Muhammad Fatkhul Alfi",
     "fullName": "Muhammad Fatkhul Alfi",
-    "roleTitle": "Website Developer",
-    "hireStatus": "Available for freelance and full-time roles",
-    "heroBio": "Fresh Graduate in Information Systems with a strong foundation in web application development and system analysis. Experienced in building web-based applications using MySQL, Laravel, and React, as well as developing a Progressive Web Application (PWA) for my final project. Adept at transforming business requirements into functional digital tools, creating clear documentation, and working collaboratively in team settings. Quick to adopt new technologies and passionate about driving value through efficient software solutions..\n",
-    "yearsExp": "0",
-    "projectsCompleted": "5+",
-    "performanceScore": "Web Development",
+    "roleTitle": "Information Systems Graduate · Web Developer",
+    "hireStatus": "Available for full-time roles and freelance projects",
+    "heroBio": "I build web applications that help teams manage everyday work. My Information Systems background brings together requirements analysis, application development, and clear technical documentation.",
     "email": "mfalfi02@gmail.com",
-    "location": "Pontianak, Indonesia (remote available)",
+    "location": "Pontianak, West Kalimantan, Indonesia",
+    "phone": "+62 821-5117-2765",
     "githubUrl": "https://github.com/mfalfi02",
     "linkedinUrl": "https://www.linkedin.com/in/muhammad-alfi-98a22a304/",
-    "twitterUrl": "https://www.instagram.com/mfalfi_?stkn=NHR1MXhsNTYxYjFz"
+    "instagramUrl": "https://www.instagram.com/mfalfi_?stkn=NHR1MXhsNTYxYjFz"
   },
   "projects": [
     {

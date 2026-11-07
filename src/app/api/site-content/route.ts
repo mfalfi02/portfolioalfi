@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { readPortfolioContent, savePortfolioContent } from "@/lib/portfolio-store";
 
 function isAuthorized(request: Request) {
-  const adminPin = process.env.ADMIN_PIN ?? "1234";
+  const adminPin = process.env.ADMIN_PIN;
   const providedPin = request.headers.get("x-admin-pin");
   return Boolean(providedPin && providedPin === adminPin);
 }

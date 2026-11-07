@@ -1,94 +1,61 @@
-import React from 'react';
-import { X, Star, Github, Globe, ArrowUpRight } from 'lucide-react';
+'use client';
+
+import React, { useEffect, useRef } from 'react';
+import Image from 'next/image';
+import { ArrowUpRight, ExternalLink, Github, X } from 'lucide-react';
 import { Project } from '@/types';
 
-export default function ProjectDetailModal({
-  project,
-  onClose,
-}: {
-  project: Project | null;
-  onClose: () => void;
-}) {
+export default function ProjectDetailModal({ project, onClose }: { project: Project | null; onClose: () => void }) {
+  const closeButton = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!project) return;
+    const previousOverflow = document.body.style.overflow;
+    const handleKeyDown = (event: KeyboardEvent) => { if (event.key === 'Escape') onClose(); };
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleKeyDown);
+    closeButton.current?.focus();
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [project, onClose]);
+
   if (!project) return null;
+  const external = /^https?:\/\//.test(project.image);
+  const svg = project.image.toLowerCase().endsWith('.svg');
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#10110f]/85 p-4 backdrop-blur-md">
-      <div className="relative flex max-h-[90vh] w-full max-w-3xl flex-col overflow-hidden border border-white/10 bg-[#171813] shadow-2xl">
-        <div className="relative h-64 md:h-80 w-full overflow-hidden bg-slate-950">
-          <img
-            src={project.image}
-            alt={project.title}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#171813] via-[#171813]/30 to-transparent" />
-          
-          <button
-            onClick={onClose}
-            className="absolute top-4 right-4 rounded-full border border-white/10 bg-slate-950/70 p-2 text-slate-300 transition-colors hover:bg-slate-900"
-          >
-            <X className="w-5 h-5" />
+    <div className="fixed inset-0 z-[70] flex items-center justify-center bg-[#10110f]/85 p-3 backdrop-blur-sm sm:p-6" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}>
+      <section role="dialog" aria-modal="true" aria-labelledby="project-dialog-title" className="relative flex max-h-[92vh] w-full max-w-4xl flex-col overflow-y-auto border border-white/10 bg-[#171813] shadow-2xl">
+        <div className="relative aspect-[1.8] max-h-[48vh] min-h-48 w-full shrink-0 overflow-hidden bg-[#22231e]">
+          <Image src={project.image} alt={`Interface preview: ${project.title}`} fill sizes="(max-width: 896px) 100vw, 896px" unoptimized={external || svg} className="object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#171813]/90 via-transparent to-transparent" />
+          <button ref={closeButton} type="button" onClick={onClose} aria-label="Close project details" className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center border border-white/20 bg-[#10110f]/70 text-white backdrop-blur-sm transition-colors hover:border-white/50">
+            <X className="h-4 w-4" />
           </button>
-
-          <div className="absolute bottom-4 left-6 right-6">
-            <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--accent)]">
-              {project.category}
-            </span>
-            <h2 className="mt-2 text-2xl font-medium tracking-tight text-white md:text-3xl">{project.title}</h2>
+          <div className="absolute bottom-5 left-5 right-5 sm:bottom-7 sm:left-8 sm:right-8">
+            <p className="eyebrow">{project.category} · Selected work</p>
+            <h2 id="project-dialog-title" className="mt-2 max-w-3xl text-2xl font-medium leading-tight tracking-[-.035em] text-white sm:text-4xl">{project.title}</h2>
           </div>
         </div>
 
-        <div className="space-y-6 overflow-y-auto p-6">
-          <p className="text-base leading-8 text-slate-300">
-            {project.description}
-          </p>
-
+        <div className="grid gap-8 p-5 sm:p-8 md:grid-cols-[1.2fr_.8fr]">
           <div>
-            <h4 className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-slate-500">
-              Tech stack
-            </h4>
-            <div className="flex flex-wrap gap-2">
-              {project.tags.map((tag, idx) => (
-                <span
-                  key={idx}
-                  className="border border-white/10 px-3 py-1.5 text-xs text-[#b5b5ac]"
-                >
-                  #{tag}
-                </span>
-              ))}
-            </div>
+            <p className="text-sm leading-7 text-[#c4c4bb]">{project.description}</p>
           </div>
-
-          <div className="flex items-center justify-between pt-4 border-t border-white/10">
-            <div className="flex items-center gap-2 text-sm text-slate-400">
-              <Star className="w-4 h-4 text-[var(--accent)]" />
-              <span>{project.stars} GitHub stars</span>
-            </div>
-
-            <div className="flex items-center gap-3">
-              {project.githubUrl && (
-                <a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 border border-white/15 px-4 py-2 text-sm font-medium text-white transition-colors hover:border-white/40"
-                >
-                  <Github className="w-4 h-4" /> Code Repository
-                </a>
-              )}
-              {project.liveUrl && (
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-[var(--accent)] px-4 py-2 text-sm font-medium text-[#15170f] transition-colors hover:bg-[#d6f993]"
-                >
-                  <Globe className="w-4 h-4" /> Live Demo <ArrowUpRight className="w-4 h-4" />
-                </a>
-              )}
+          <div className="border-t border-white/10 pt-5 md:border-l md:border-t-0 md:pl-7 md:pt-0">
+            <h3 className="font-mono text-[10px] uppercase tracking-[.14em] text-[#77786f]">Built with</h3>
+            <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-2">
+              {project.tags.map((tag) => <li key={tag} className="text-sm text-[#e2e1d9]">{tag}</li>)}
+            </ul>
+            <div className="mt-6 flex flex-wrap gap-x-5 gap-y-3">
+              {project.githubUrl && <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm text-white transition-colors hover:text-[var(--accent)]"><Github className="h-4 w-4" /> Source code <ArrowUpRight className="h-3.5 w-3.5" /></a>}
+              {project.liveUrl && <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm text-white transition-colors hover:text-[var(--accent)]"><ExternalLink className="h-4 w-4" /> Live project <ArrowUpRight className="h-3.5 w-3.5" /></a>}
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

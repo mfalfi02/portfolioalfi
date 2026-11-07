@@ -3,10 +3,24 @@ import nodemailer from 'nodemailer';
 
 export const runtime = 'nodejs';
 
+function escapeHtml(value: string) {
+  const entities: Record<string, string> = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;',
+  };
+  return value.replace(/[&<>"']/g, (character) => entities[character] ?? character);
+}
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, subject, message } = body;
+    const name = typeof body?.name === 'string' ? body.name.trim() : '';
+    const email = typeof body?.email === 'string' ? body.email.trim() : '';
+    const subject = typeof body?.subject === 'string' ? body.subject.trim() : '';
+    const message = typeof body?.message === 'string' ? body.message.trim() : '';
 
     if (!name || !email || !message) {
       return NextResponse.json(
@@ -15,12 +29,16 @@ export async function POST(request: Request) {
       );
     }
 
-    const gmailUser = process.env.EMAIL_USER || 'mfalfi02@gmail.com';
-    const gmailPass = process.env.EMAIL_PASS || 'nqkn bdlz djcu srmr';
-    const recipientEmail = process.env.EMAIL_TO || 'mfalfi02@gmail.com';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return NextResponse.json({ error: 'Please enter a valid email address.' }, { status: 400 });
+    }
 
-    if (!gmailUser || !gmailPass) {
-      console.error('Missing Gmail SMTP configuration. Set EMAIL_USER and EMAIL_PASS.');
+    const gmailUser = process.env.EMAIL_USER;
+    const gmailPass = process.env.EMAIL_PASS;
+    const recipientEmail = process.env.EMAIL_TO || gmailUser;
+
+    if (!gmailUser || !gmailPass || !recipientEmail) {
+      console.error('Missing email service configuration. Set EMAIL_USER, EMAIL_PASS, and EMAIL_TO.');
       return NextResponse.json(
         {
           error:
@@ -38,10 +56,14 @@ export async function POST(request: Request) {
       },
     });
 
-    const emailSubject = (subject && String(subject).trim()) || 'New message from portfolio contact form';
+    const emailSubject = (subject || 'New message from portfolio contact form').replace(/[\r\n]+/g, ' ');
+    const safeName = escapeHtml(name);
+    const safeEmail = escapeHtml(email);
+    const safeSubject = escapeHtml(emailSubject);
+    const safeMessage = escapeHtml(message).replace(/\n/g, '<br />');
 
     await transporter.sendMail({
-      from: `"${String(name).trim()}" <${gmailUser}>`,
+      from: `Portfolio contact <${gmailUser}>`,
       to: recipientEmail,
       replyTo: email,
       subject: emailSubject,
@@ -49,11 +71,11 @@ export async function POST(request: Request) {
       html: `
         <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #111827;">
           <h3 style="margin-bottom: 12px;">Pesan Baru dari Portfolio</h3>
-          <p><strong>Nama:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Subjek:</strong> ${emailSubject}</p>
+          <p><strong>Nama:</strong> ${safeName}</p>
+          <p><strong>Email:</strong> ${safeEmail}</p>
+          <p><strong>Subjek:</strong> ${safeSubject}</p>
           <div style="margin-top: 16px; padding: 12px 16px; background: #f3f4f6; border-radius: 8px;">
-            ${message.replace(/\n/g, '<br />')}
+            ${safeMessage}
           </div>
         </div>
       `,

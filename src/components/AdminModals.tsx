@@ -51,13 +51,11 @@ export function AddProjectModal({
         title: formData.title,
         description: formData.description,
         category: formData.category,
-        image:
-          formData.image ||
-          'https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=1200&q=80',
-        tags: formData.tags ? formData.tags.split(',').map((tag) => tag.trim()).filter(Boolean) : ['Next.js', 'TypeScript'],
+        image: formData.image,
+        tags: formData.tags ? formData.tags.split(',').map((tag) => tag.trim()).filter(Boolean) : [],
         githubUrl: formData.githubUrl || undefined,
         liveUrl: formData.liveUrl || undefined,
-        stars: Math.floor(Math.random() * 20) + 1,
+        stars: 0,
         date: new Date().toISOString().slice(0, 7),
       };
 
@@ -124,10 +122,11 @@ export function AddProjectModal({
 
             <div>
               <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
-                Banner URL
+              Project screenshot URL
               </label>
               <input
                 type="url"
+                required
                 placeholder="https://..."
                 value={formData.image}
                 onChange={(e) => setFormData({ ...formData, image: e.target.value })}
@@ -472,42 +471,6 @@ export function AdminDashboardModal({
               <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                 <div>
                   <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
-                    Experience
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.yearsExp}
-                    onChange={(e) => setFormData({ ...formData, yearsExp: e.target.value })}
-                    className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-emerald-300/40"
-                  />
-                </div>
-                <div>
-                  <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
-                    Projects
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.projectsCompleted}
-                    onChange={(e) => setFormData({ ...formData, projectsCompleted: e.target.value })}
-                    className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-emerald-300/40"
-                  />
-                </div>
-                <div>
-                  <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
-                    Performance focus
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.performanceScore}
-                    onChange={(e) => setFormData({ ...formData, performanceScore: e.target.value })}
-                    className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-emerald-300/40"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                <div>
-                  <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
                     Email
                   </label>
                   <input
@@ -515,6 +478,15 @@ export function AdminDashboardModal({
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-emerald-300/40"
+                  />
+                </div>
+                <div>
+                  <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Phone / WhatsApp</label>
+                  <input
+                    type="tel"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-[var(--accent)]"
                   />
                 </div>
                 <div>

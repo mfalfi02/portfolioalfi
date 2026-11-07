@@ -14,7 +14,7 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; background: var(--background); }
+html { scroll-behavior: smooth; scroll-padding-top: 88px; background: var(--background); }
 body {
   min-height: 100vh;
   overflow-x: hidden;
@@ -30,6 +30,9 @@ body {
 ::-webkit-scrollbar-thumb:hover { background: #c8f169; }
 
 .section-shell { width: min(1180px, calc(100% - 48px)); margin-inline: auto; }
+.section-shell a, button, input, textarea { -webkit-tap-highlight-color: transparent; }
+.section-shell a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+section[id] { scroll-margin-top: 88px; }
 .eyebrow { color: var(--accent); font: 500 11px/1.4 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; }
 .section-title { color: var(--foreground); font-size: clamp(2rem, 4vw, 3.35rem); line-height: 1.08; letter-spacing: -.045em; font-weight: 550; }
 .section-copy { color: var(--muted); line-height: 1.8; }
