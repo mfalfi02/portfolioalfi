@@ -70,14 +70,14 @@ export function AddProjectModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/75 backdrop-blur-xl animate-fadeIn">
-      <div className="relative w-full max-w-xl overflow-hidden rounded-3xl border border-white/10 bg-slate-950 shadow-2xl">
-        <div className="flex items-center justify-between border-b border-white/10 px-6 py-5">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-surface/75 backdrop-blur-xl animate-fadeIn">
+      <div className="relative w-full max-w-xl overflow-hidden rounded-3xl border border-foreground/10 bg-surface shadow-2xl">
+        <div className="flex items-center justify-between border-b border-foreground/10 px-6 py-5">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-emerald-300">Project manager</p>
-            <h3 className="mt-1 text-xl font-semibold text-white">Add a new project</h3>
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-accent">Project manager</p>
+            <h3 className="mt-1 text-xl font-semibold text-foreground">Add a new project</h3>
           </div>
-          <button onClick={onClose} className="rounded-full border border-white/10 p-2 text-slate-300 transition-colors hover:bg-white/5 hover:text-white">
+          <button onClick={onClose} className="rounded-full border border-foreground/10 p-2 text-muted transition-colors hover:bg-foreground/5 hover:text-foreground">
             <X className="h-4 w-4" />
           </button>
         </div>
@@ -90,7 +90,7 @@ export function AddProjectModal({
           )}
 
           <div>
-            <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+            <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-muted">
               Project title
             </label>
             <input
@@ -99,19 +99,19 @@ export function AddProjectModal({
               placeholder="Example: Portfolio CMS"
               value={formData.title}
               onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-              className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-slate-500 focus:border-emerald-300/40"
+              className="w-full rounded-2xl border border-foreground/10 bg-foreground/5 px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted/70 focus:border-accent/60"
             />
           </div>
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div>
-              <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+              <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-muted">
                 Category
               </label>
               <select
                 value={formData.category}
                 onChange={(e) => setFormData({ ...formData, category: e.target.value as Project['category'] })}
-                className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-emerald-300/40"
+                className="w-full rounded-2xl border border-foreground/10 bg-foreground/5 px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-accent/60"
               >
                 <option value="Fullstack">Fullstack</option>
                 <option value="3D/WebXR">3D / WebXR</option>
@@ -121,7 +121,7 @@ export function AddProjectModal({
             </div>
 
             <div>
-              <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+              <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-muted">
               Project screenshot URL
               </label>
               <input
@@ -130,13 +130,13 @@ export function AddProjectModal({
                 placeholder="https://..."
                 value={formData.image}
                 onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-slate-500 focus:border-emerald-300/40"
+                className="w-full rounded-2xl border border-foreground/10 bg-foreground/5 px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted/70 focus:border-accent/60"
               />
             </div>
           </div>
 
           <div>
-            <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+            <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-muted">
               Description
             </label>
             <textarea
@@ -145,12 +145,12 @@ export function AddProjectModal({
               placeholder="Describe the goal, outcome, and what makes this project relevant."
               value={formData.description}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-              className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-slate-500 focus:border-emerald-300/40"
+              className="w-full rounded-2xl border border-foreground/10 bg-foreground/5 px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted/70 focus:border-accent/60"
             />
           </div>
 
           <div>
-            <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+            <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-muted">
               Tech stack
             </label>
             <input
@@ -158,13 +158,13 @@ export function AddProjectModal({
               placeholder="Next.js, TypeScript, Tailwind CSS"
               value={formData.tags}
               onChange={(e) => setFormData({ ...formData, tags: e.target.value })}
-              className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-slate-500 focus:border-emerald-300/40"
+              className="w-full rounded-2xl border border-foreground/10 bg-foreground/5 px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted/70 focus:border-accent/60"
             />
           </div>
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div>
-              <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+              <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-muted">
                 Github link
               </label>
               <input
@@ -172,11 +172,11 @@ export function AddProjectModal({
                 placeholder="https://github.com/..."
                 value={formData.githubUrl}
                 onChange={(e) => setFormData({ ...formData, githubUrl: e.target.value })}
-                className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-slate-500 focus:border-emerald-300/40"
+                className="w-full rounded-2xl border border-foreground/10 bg-foreground/5 px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted/70 focus:border-accent/60"
               />
             </div>
             <div>
-              <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+              <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-muted">
                 Live demo
               </label>
               <input
@@ -184,23 +184,23 @@ export function AddProjectModal({
                 placeholder="https://your-project.vercel.app"
                 value={formData.liveUrl}
                 onChange={(e) => setFormData({ ...formData, liveUrl: e.target.value })}
-                className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-slate-500 focus:border-emerald-300/40"
+                className="w-full rounded-2xl border border-foreground/10 bg-foreground/5 px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted/70 focus:border-accent/60"
               />
             </div>
           </div>
 
-          <div className="flex items-center justify-end gap-3 border-t border-white/10 pt-4">
+          <div className="flex items-center justify-end gap-3 border-t border-foreground/10 pt-4">
             <button
               type="button"
               onClick={onClose}
-              className="rounded-full px-4 py-2 text-sm text-slate-300 transition-colors hover:bg-white/5 hover:text-white"
+              className="rounded-full px-4 py-2 text-sm text-muted transition-colors hover:bg-foreground/5 hover:text-foreground"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isSaving}
-              className="inline-flex items-center gap-2 rounded-full bg-emerald-400 px-5 py-2.5 text-sm font-semibold text-slate-950 transition-colors hover:bg-emerald-300 disabled:cursor-not-allowed disabled:opacity-60"
+              className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-background transition-colors hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {isSaving ? <Loader2 className="h-4 w-4 animate-spin" /> : <Plus className="h-4 w-4" />}
               Save project
@@ -254,27 +254,27 @@ export function AdminLoginModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/75 backdrop-blur-xl animate-fadeIn">
-      <div className="relative w-full max-w-sm rounded-3xl border border-white/10 bg-slate-950 shadow-2xl">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-surface/75 backdrop-blur-xl animate-fadeIn">
+      <div className="relative w-full max-w-sm rounded-3xl border border-foreground/10 bg-surface shadow-2xl">
         <button
           onClick={onClose}
-          className="absolute right-4 top-4 rounded-full border border-white/10 p-2 text-slate-300 transition-colors hover:bg-white/5 hover:text-white"
+          className="absolute right-4 top-4 rounded-full border border-foreground/10 p-2 text-muted transition-colors hover:bg-foreground/5 hover:text-foreground"
         >
           <X className="h-4 w-4" />
         </button>
 
         <div className="px-6 py-8 text-center">
-          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl border border-emerald-300/20 bg-emerald-400/10 text-emerald-300">
+          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl border border-accent/20 bg-accent/10 text-accent">
             <ShieldCheck className="h-6 w-6" />
           </div>
-          <h3 className="mt-5 text-xl font-semibold text-white">Admin dashboard access</h3>
-          <p className="mt-2 text-sm leading-6 text-slate-400">
+          <h3 className="mt-5 text-xl font-semibold text-foreground">Admin dashboard access</h3>
+          <p className="mt-2 text-sm leading-6 text-muted">
             Enter your PIN to manage the profile and project list.
           </p>
 
           <form onSubmit={handleLogin} className="mt-6 space-y-3 text-left">
             <div>
-              <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+              <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-muted">
                 Admin PIN
               </label>
               <input
@@ -285,7 +285,7 @@ export function AdminLoginModal({
                   setPin(e.target.value);
                   setError('');
                 }}
-                className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-center text-sm tracking-[0.3em] text-white outline-none transition-colors placeholder:text-slate-500 focus:border-emerald-300/40"
+                className="w-full rounded-2xl border border-foreground/10 bg-foreground/5 px-4 py-3 text-center text-sm tracking-[0.3em] text-foreground outline-none transition-colors placeholder:text-muted/70 focus:border-accent/60"
               />
               {error && <p className="mt-2 text-sm text-red-300">{error}</p>}
             </div>
@@ -293,7 +293,7 @@ export function AdminLoginModal({
             <button
               type="submit"
               disabled={isLoading}
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-slate-200 disabled:cursor-not-allowed disabled:opacity-60"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 py-3 text-sm font-semibold text-background transition-colors hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <ShieldCheck className="h-4 w-4" />}
               Sign in
@@ -348,34 +348,34 @@ export function AdminDashboardModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/75 backdrop-blur-xl animate-fadeIn">
-      <div className="flex max-h-[90vh] w-full max-w-4xl flex-col overflow-hidden rounded-3xl border border-white/10 bg-slate-950 shadow-2xl">
-        <div className="flex items-center justify-between border-b border-white/10 px-6 py-5">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-surface/75 backdrop-blur-xl animate-fadeIn">
+      <div className="flex max-h-[90vh] w-full max-w-4xl flex-col overflow-hidden rounded-3xl border border-foreground/10 bg-surface shadow-2xl">
+        <div className="flex items-center justify-between border-b border-foreground/10 px-6 py-5">
           <div className="flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-emerald-300/20 bg-emerald-400/10 text-emerald-300">
+            <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-accent/20 bg-accent/10 text-accent">
               <Settings className="h-5 w-5" />
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-white">Content management</h3>
-              <p className="text-sm text-slate-400">Edit the main profile and project list in one place.</p>
+              <h3 className="text-lg font-semibold text-foreground">Content management</h3>
+              <p className="text-sm text-muted">Edit the main profile and project list in one place.</p>
             </div>
           </div>
 
           <button
             onClick={onClose}
-            className="rounded-full border border-white/10 p-2 text-slate-300 transition-colors hover:bg-white/5 hover:text-white"
+            className="rounded-full border border-foreground/10 p-2 text-muted transition-colors hover:bg-foreground/5 hover:text-foreground"
           >
             <X className="h-4 w-4" />
           </button>
         </div>
 
-        <div className="flex gap-2 border-b border-white/10 px-6 py-4">
+        <div className="flex gap-2 border-b border-foreground/10 px-6 py-4">
           <button
             onClick={() => setActiveTab('bio')}
             className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-colors ${
               activeTab === 'bio'
-                ? 'bg-white text-slate-950'
-                : 'text-slate-300 hover:bg-white/5 hover:text-white'
+                ? 'bg-foreground text-background'
+                : 'text-muted hover:bg-foreground/5 hover:text-foreground'
             }`}
           >
             <User className="h-4 w-4" /> Profile
@@ -384,8 +384,8 @@ export function AdminDashboardModal({
             onClick={() => setActiveTab('projects')}
             className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-colors ${
               activeTab === 'projects'
-                ? 'bg-white text-slate-950'
-                : 'text-slate-300 hover:bg-white/5 hover:text-white'
+                ? 'bg-foreground text-background'
+                : 'text-muted hover:bg-foreground/5 hover:text-foreground'
             }`}
           >
             <FolderGit2 className="h-4 w-4" /> Projects
@@ -401,7 +401,7 @@ export function AdminDashboardModal({
                 </div>
               )}
               {savedSuccess && (
-                <div className="inline-flex items-center gap-2 rounded-2xl border border-emerald-300/20 bg-emerald-400/10 px-4 py-3 text-sm text-emerald-200">
+                <div className="inline-flex items-center gap-2 rounded-2xl border border-accent/20 bg-accent/10 px-4 py-3 text-sm text-accent">
                   <Check className="h-4 w-4" />
                   Profile changes saved.
                 </div>
@@ -409,104 +409,104 @@ export function AdminDashboardModal({
 
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div>
-                  <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+                  <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-muted">
                     Brand name
                   </label>
                   <input
                     type="text"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-emerald-300/40"
+                    className="w-full rounded-2xl border border-foreground/10 bg-foreground/5 px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-accent/60"
                   />
                 </div>
                 <div>
-                  <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+                  <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-muted">
                     Full name
                   </label>
                   <input
                     type="text"
                     value={formData.fullName}
                     onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                    className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-emerald-300/40"
+                    className="w-full rounded-2xl border border-foreground/10 bg-foreground/5 px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-accent/60"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+                <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-muted">
                   Role
                 </label>
                 <input
                   type="text"
                   value={formData.roleTitle}
                   onChange={(e) => setFormData({ ...formData, roleTitle: e.target.value })}
-                  className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-emerald-300/40"
+                  className="w-full rounded-2xl border border-foreground/10 bg-foreground/5 px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-accent/60"
                 />
               </div>
 
               <div>
-                <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+                <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-muted">
                   Status
                 </label>
                 <input
                   type="text"
                   value={formData.hireStatus}
                   onChange={(e) => setFormData({ ...formData, hireStatus: e.target.value })}
-                  className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-emerald-300/40"
+                  className="w-full rounded-2xl border border-foreground/10 bg-foreground/5 px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-accent/60"
                 />
               </div>
 
               <div>
-                <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+                <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-muted">
                     Short bio
                 </label>
                 <textarea
                   rows={4}
                   value={formData.heroBio}
                   onChange={(e) => setFormData({ ...formData, heroBio: e.target.value })}
-                  className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-emerald-300/40"
+                  className="w-full rounded-2xl border border-foreground/10 bg-foreground/5 px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-accent/60"
                 />
               </div>
 
               <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                 <div>
-                  <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+                  <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-muted">
                     Email
                   </label>
                   <input
                     type="email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-emerald-300/40"
+                    className="w-full rounded-2xl border border-foreground/10 bg-foreground/5 px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-accent/60"
                   />
                 </div>
                 <div>
-                  <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Phone / WhatsApp</label>
+                  <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-muted">Phone / WhatsApp</label>
                   <input
                     type="tel"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-[var(--accent)]"
+                    className="w-full rounded-2xl border border-foreground/10 bg-foreground/5 px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-[var(--accent)]"
                   />
                 </div>
                 <div>
-                  <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+                  <label className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-muted">
                     Location
                   </label>
                   <input
                     type="text"
                     value={formData.location}
                     onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                    className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-emerald-300/40"
+                    className="w-full rounded-2xl border border-foreground/10 bg-foreground/5 px-4 py-3 text-sm text-foreground outline-none transition-colors focus:border-accent/60"
                   />
                 </div>
               </div>
 
-              <div className="flex justify-end border-t border-white/10 pt-4">
+              <div className="flex justify-end border-t border-foreground/10 pt-4">
                 <button
                   type="submit"
                   disabled={isSaving}
-                  className="inline-flex items-center gap-2 rounded-full bg-emerald-400 px-5 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-emerald-300 disabled:cursor-not-allowed disabled:opacity-60"
+                  className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-background transition-colors hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {isSaving ? <Loader2 className="h-4 w-4 animate-spin" /> : <Check className="h-4 w-4" />}
                   Save changes
@@ -517,10 +517,10 @@ export function AdminDashboardModal({
 
           {activeTab === 'projects' && (
             <div className="space-y-4">
-              <div className="rounded-3xl border border-white/10 bg-white/5 p-5">
-                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-emerald-300">Project list</p>
-                <h4 className="mt-2 text-lg font-semibold text-white">Add new work to the portfolio</h4>
-                <p className="mt-2 text-sm leading-6 text-slate-400">
+              <div className="rounded-3xl border border-foreground/10 bg-foreground/5 p-5">
+                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-accent">Project list</p>
+                <h4 className="mt-2 text-lg font-semibold text-foreground">Add new work to the portfolio</h4>
+                <p className="mt-2 text-sm leading-6 text-muted">
                   Add a project here and the data will be saved to the local backend.
                 </p>
                 <button
@@ -528,7 +528,7 @@ export function AdminDashboardModal({
                     onClose();
                     onOpenAddProject();
                   }}
-                  className="mt-4 inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-slate-200"
+                  className="mt-4 inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-3 text-sm font-semibold text-background transition-colors hover:opacity-90"
                 >
                   <Plus className="h-4 w-4" />
                   Add project

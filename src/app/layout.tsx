@@ -31,7 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="bg-background text-foreground antialiased selection:bg-[var(--accent)] selection:text-[#10110f]">
+      <body className="bg-background text-foreground antialiased selection:bg-[var(--accent)] selection:text-accent-foreground">
         {children}
         <Analytics />
       </body>

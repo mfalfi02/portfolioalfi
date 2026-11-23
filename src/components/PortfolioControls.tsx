@@ -7,6 +7,7 @@ import ProjectDetailModal from '@/components/ProjectDetailModal';
 import { AddProjectModal, AdminDashboardModal, AdminLoginModal } from '@/components/AdminModals';
 
 interface PortfolioControlsValue {
+  profile: UserProfile;
   projects: Project[];
   isAdmin: boolean;
   onSelectProject: (project: Project) => void;
@@ -58,6 +59,7 @@ export default function PortfolioControls({
   }, [adminPin, router]);
 
   const value = useMemo<PortfolioControlsValue>(() => ({
+    profile,
     projects,
     isAdmin,
     onSelectProject: setSelectedProject,
@@ -71,9 +73,9 @@ export default function PortfolioControls({
   return (
     <PortfolioControlsContext.Provider value={value}>
       {isAdmin && (
-        <div className="relative z-50 flex items-center justify-between gap-4 border-b border-[var(--accent)]/20 bg-[#20251a] px-5 py-2 text-xs text-[#e7f5ce] sm:px-8">
+        <div className="relative z-50 flex items-center justify-between gap-4 border-b border-[var(--accent)]/20 bg-surface-alt px-5 py-2 text-xs text-foreground sm:px-8">
           <p><span className="mr-2 text-[var(--accent)]">●</span>Portfolio editing is enabled.</p>
-          <button onClick={() => setIsDashboardOpen(true)} className="underline decoration-white/30 underline-offset-4 hover:text-[var(--accent)]">Open dashboard</button>
+          <button onClick={() => setIsDashboardOpen(true)} className="underline decoration-foreground/30 underline-offset-4 hover:text-[var(--accent)]">Open dashboard</button>
         </div>
       )}
       {children}

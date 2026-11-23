@@ -16,7 +16,7 @@ export default async function Home() {
 
   return (
     <PortfolioControls profile={profile} projects={projects}>
-      <main className="relative min-h-screen overflow-x-hidden text-[#f1f0e9]">
+      <main className="relative min-h-screen overflow-x-hidden text-foreground">
         <Navbar profile={profile} />
         <HeroSection profile={profile} />
         <AboutSection profile={profile} />

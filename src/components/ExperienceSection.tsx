@@ -23,11 +23,10 @@ const background = [
 
 export default function ExperienceSection() {
   return (
-    <section id="experience" className="border-y border-white/10 bg-[#151612] py-24 md:py-32">
+    <section id="experience" className="border-y border-foreground/10 bg-surface py-24 md:py-32">
       <div className="section-shell">
         <div className="mb-12 grid gap-6 md:grid-cols-[.8fr_1.2fr] md:items-end">
           <div>
-            <p className="eyebrow mb-4">04 / Background</p>
             <h2 className="section-title">Education &amp; involvement.</h2>
           </div>
           <p className="section-copy max-w-xl text-sm">
@@ -35,16 +34,16 @@ export default function ExperienceSection() {
           </p>
         </div>
 
-        <div className="border-t border-white/10">
+        <div className="border-t border-foreground/10">
           {background.map((item) => (
-            <article key={`${item.title}-${item.period}`} className="grid gap-3 border-b border-white/10 py-6 md:grid-cols-[150px_1fr] md:gap-10 md:py-7">
+            <article key={`${item.title}-${item.period}`} className="grid gap-3 border-b border-foreground/10 py-6 md:grid-cols-[150px_1fr] md:gap-10 md:py-7">
               <p className="font-mono text-xs text-[var(--accent)]">{item.period}</p>
               <div className="grid gap-2 md:grid-cols-[.9fr_1.1fr] md:gap-8">
                 <div>
-                  <h3 className="text-base font-medium text-white sm:text-lg">{item.title}</h3>
-                  <p className="mt-1 text-sm text-[#a4a49a]">{item.place}</p>
+                  <h3 className="text-base font-medium text-foreground sm:text-lg">{item.title}</h3>
+                  <p className="mt-1 text-sm text-muted">{item.place}</p>
                 </div>
-                  {item.detail && <p className="text-sm leading-7 text-[#898a81]">{item.detail}</p>}
+                  {item.detail && <p className="text-sm leading-7 text-muted/80">{item.detail}</p>}
               </div>
             </article>
           ))}
