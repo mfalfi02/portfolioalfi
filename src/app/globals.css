@@ -55,6 +55,11 @@ section[id] { scroll-margin-top: 88px; }
 .display-heading { font-family: var(--font-display); }
 .section-copy { color: var(--muted); line-height: 1.8; }
 .hairline { border-color: var(--line); }
+.project-horizontal-track { cursor: grab; scrollbar-width: thin; scrollbar-color: var(--accent) var(--surface); }
+.project-horizontal-track:active { cursor: grabbing; }
+.project-horizontal-track::-webkit-scrollbar { height: 6px; }
+.project-horizontal-track::-webkit-scrollbar-track { background: var(--surface); }
+.project-horizontal-track::-webkit-scrollbar-thumb { background: var(--accent); }
 .profile-project-card { animation: profile-card-in 320ms ease both; }
 @keyframes profile-card-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 .nav-link { position: relative; padding-block: 8px; }
@@ -65,10 +70,10 @@ section[id] { scroll-margin-top: 88px; }
 .reveal-visible { opacity: 1; transform: translateY(0); transition: opacity 650ms ease, transform 650ms cubic-bezier(.2,.65,.25,1); }
 .hero-enter { animation: hero-enter 700ms both cubic-bezier(.2,.65,.25,1); }
 @keyframes hero-enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-.portfolio-hero-title { font-family: var(--font-display); font-size: clamp(2rem, 8.6vw, 8rem); font-weight: 600; }
+.portfolio-hero-title { font-family: var(--font-display); font-size: clamp(1.75rem, 6.5vw, 7rem); font-weight: 600; }
 .portfolio-name-line { animation: hero-name-in 650ms both cubic-bezier(.2,.65,.25,1); }
 .portfolio-name-line + .portfolio-name-line { animation-delay: 100ms; }
-.portfolio-portrait { width: clamp(78px, 10vw, 128px); height: clamp(132px, 17vw, 218px); }
+.portfolio-portrait { width: clamp(128px, 20vw, 270px); aspect-ratio: 896 / 1160; }
 .portrait-wash { background: linear-gradient(145deg, color-mix(in srgb, var(--accent) 9%, transparent), transparent 42%); }
 @keyframes hero-name-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 

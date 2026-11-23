@@ -23,22 +23,22 @@ export default function PortfolioHero({ profile }: { profile: UserProfile }) {
         <p className="hidden shrink-0 font-mono text-[10px] uppercase tracking-[.14em] text-muted/70 sm:block">{profile.location}</p>
       </div>
 
-      <div className="section-shell relative my-auto w-full py-12 sm:py-16">
-        <h1 className="portfolio-hero-title text-center font-semibold uppercase leading-[.78] tracking-[-.09em] text-[var(--accent)]" aria-label={name}>
-          {firstNameParts && <span aria-hidden="true" className="portfolio-name-line block">{firstNameParts}</span>}
-          <span aria-hidden="true" className="portfolio-name-line block">{finalNamePart}</span>
-        </h1>
-        <div className="portfolio-portrait absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 overflow-hidden border border-foreground/15 bg-surface-alt">
+      <div className="section-shell my-auto flex w-full flex-col items-center py-8 text-center sm:py-10">
+        <div className="portfolio-portrait relative shrink-0">
           <Image
-            src="/images/alfi-portrait.png"
+            src="/images/alfi-home-cutout.png"
             alt={`Portrait of ${name}`}
             fill
             priority
-            sizes="(max-width: 640px) 78px, (max-width: 1024px) 104px, 128px"
-            className="object-cover object-[center_28%] transition-transform duration-500 hover:scale-105"
+            sizes="(max-width: 640px) 140px, (max-width: 1024px) 24vw, 310px"
+            className="object-contain drop-shadow-[0_12px_18px_rgba(0,0,0,0.16)] transition-transform duration-500 hover:scale-[1.025]"
           />
         </div>
-        <p className="mt-7 text-center text-sm tracking-wide text-foreground/85 sm:text-base">{profile.roleTitle}</p>
+        <h1 className="portfolio-hero-title mt-5 text-center font-semibold uppercase leading-[.86] tracking-[-.075em] text-[var(--accent)]" aria-label={name}>
+          {firstNameParts && <span aria-hidden="true" className="portfolio-name-line block whitespace-nowrap">{firstNameParts}</span>}
+          <span aria-hidden="true" className="portfolio-name-line block whitespace-nowrap">{finalNamePart}</span>
+        </h1>
+        <p className="mt-3 text-center text-sm tracking-wide text-foreground/85 sm:text-base">{profile.roleTitle}</p>
       </div>
 
       <div className="section-shell grid w-full items-end gap-7 border-t border-foreground/10 pt-5 sm:grid-cols-[1fr_auto] sm:gap-10 sm:pt-6">

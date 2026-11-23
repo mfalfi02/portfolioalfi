@@ -1,7 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import type { MouseEvent as ReactMouseEvent, PointerEvent as ReactPointerEvent } from 'react';
 import { ArrowUpRight, ChevronLeft, ChevronRight, ExternalLink, Github, Instagram, Linkedin, Trash2 } from 'lucide-react';
 import type { Project, UserProfile } from '@/types';
 
@@ -14,13 +15,67 @@ interface ProfileCardTestimonialCarouselProps {
 }
 
 export function ProfileCardTestimonialCarousel({ projects, profile, onSelectProject, isAdmin, onDeleteProject }: ProfileCardTestimonialCarouselProps) {
-  const [activeIndex, setActiveIndex] = useState(0);
-  if (projects.length === 0) return null;
+  const trackRef = useRef<HTMLUListElement>(null);
+  const dragRef = useRef<{ pointerId: number; startX: number; startScroll: number; moved: boolean } | null>(null);
+  const suppressClickRef = useRef(false);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
 
-  const index = Math.min(activeIndex, projects.length - 1);
-  const project = projects[index];
-  const external = /^https?:\/\//.test(project.image);
-  const svg = project.image.toLowerCase().endsWith('.svg');
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    const updateScrollState = () => {
+      setCanScrollLeft(track.scrollLeft > 4);
+      setCanScrollRight(track.scrollLeft + track.clientWidth < track.scrollWidth - 4);
+    };
+
+    updateScrollState();
+    track.addEventListener('scroll', updateScrollState, { passive: true });
+    const resizeObserver = new ResizeObserver(updateScrollState);
+    resizeObserver.observe(track);
+    return () => {
+      track.removeEventListener('scroll', updateScrollState);
+      resizeObserver.disconnect();
+    };
+  }, [projects.length]);
+
+  const scroll = (direction: 'left' | 'right') => {
+    const track = trackRef.current;
+    if (!track) return;
+    track.scrollBy({ left: direction === 'left' ? -track.clientWidth * 0.8 : track.clientWidth * 0.8, behavior: 'smooth' });
+  };
+
+  const handlePointerDown = (event: ReactPointerEvent<HTMLUListElement>) => {
+    if (event.pointerType === 'touch' || event.button !== 0) return;
+    dragRef.current = { pointerId: event.pointerId, startX: event.clientX, startScroll: event.currentTarget.scrollLeft, moved: false };
+  };
+
+  const handlePointerMove = (event: ReactPointerEvent<HTMLUListElement>) => {
+    if (dragRef.current?.pointerId !== event.pointerId) return;
+    const distance = event.clientX - dragRef.current.startX;
+    if (Math.abs(distance) > 5) {
+      dragRef.current.moved = true;
+      suppressClickRef.current = true;
+      event.currentTarget.scrollLeft = dragRef.current.startScroll - distance;
+    }
+  };
+
+  const endDrag = (event: ReactPointerEvent<HTMLUListElement>) => {
+    if (dragRef.current?.pointerId === event.pointerId) {
+      const moved = dragRef.current.moved;
+      dragRef.current = null;
+      if (moved) window.setTimeout(() => { suppressClickRef.current = false; }, 0);
+    }
+  };
+
+  const handleClickCapture = (event: ReactMouseEvent<HTMLUListElement>) => {
+    if (!suppressClickRef.current) return;
+    event.preventDefault();
+    event.stopPropagation();
+    suppressClickRef.current = false;
+  };
+
   const socialLinks = [
     { label: 'GitHub', href: profile.githubUrl, icon: Github },
     { label: 'LinkedIn', href: profile.linkedinUrl, icon: Linkedin },
@@ -28,65 +83,69 @@ export function ProfileCardTestimonialCarousel({ projects, profile, onSelectProj
   ].filter((link) => link.href);
 
   return (
-    <div className="mx-auto w-full max-w-5xl">
-      <article key={project.id} aria-live="polite" className="profile-project-card grid overflow-hidden border border-foreground/10 bg-background md:min-h-[390px] md:grid-cols-[.9fr_1.1fr]">
-        <div className="relative min-h-[240px] overflow-hidden bg-surface-alt sm:min-h-[320px] md:min-h-full">
-          <Image
-            src={project.image}
-            alt={`Interface preview: ${project.title}`}
-            fill
-            sizes="(max-width: 768px) 100vw, 420px"
-            unoptimized={external || svg}
-            className="object-cover"
-          />
-          <span className="absolute bottom-4 left-4 bg-background/90 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[.12em] text-foreground">{project.category} / {String(index + 1).padStart(2, '0')}</span>
-        </div>
-
-        <div className="flex flex-col justify-between p-5 sm:p-8 md:p-9">
-          <div>
-            <p className="eyebrow">Project notes</p>
-            <button type="button" onClick={() => onSelectProject(project)} className="display-heading mt-4 text-left text-2xl font-medium leading-tight tracking-[-.035em] text-foreground transition-colors hover:text-accent sm:text-3xl">{project.title}</button>
-            <p className="mt-4 text-sm leading-7 text-muted sm:text-[15px]">{project.description}</p>
-            <ul aria-label="Technologies used" className="mt-5 flex flex-wrap gap-x-4 gap-y-2 font-mono text-[10px] uppercase tracking-[.08em] text-muted">
-              {project.tags.map((tag) => <li key={tag}>{tag}</li>)}
-            </ul>
-          </div>
-
-          <div className="mt-7 flex flex-col gap-5 border-t border-foreground/10 pt-5 sm:flex-row sm:items-end sm:justify-between">
-            <div className="flex items-center gap-3">
-              <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full border border-foreground/15">
-                <Image src="/images/alfi-portrait.png" alt="" fill sizes="44px" className="object-cover object-[center_25%]" />
-              </div>
-              <div>
-                <p className="text-sm font-semibold text-foreground">{profile.fullName || profile.name}</p>
-                <p className="mt-0.5 text-xs text-muted">{profile.roleTitle}</p>
-                <div className="mt-2 flex gap-3">
-                  {socialLinks.map(({ label, href, icon: Icon }) => <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={`${label} profile`} className="text-muted transition-colors hover:text-accent"><Icon aria-hidden="true" className="h-3.5 w-3.5" /></a>)}
-                </div>
-              </div>
-            </div>
-
-            <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs">
-              {project.githubUrl && <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-foreground transition-colors hover:text-accent"><Github className="h-3.5 w-3.5" /> Source <ArrowUpRight className="h-3 w-3" /></a>}
-              {project.liveUrl && <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-foreground transition-colors hover:text-accent"><ExternalLink className="h-3.5 w-3.5" /> Live <ArrowUpRight className="h-3 w-3" /></a>}
-              {isAdmin && <button type="button" onClick={() => onDeleteProject(project.id)} aria-label={`Delete ${project.title}`} className="text-muted transition-colors hover:text-red-400"><Trash2 className="h-4 w-4" /></button>}
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <div className="mt-5 flex items-center justify-between gap-4">
-        <p className="font-mono text-[10px] uppercase tracking-[.12em] text-muted">{String(index + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}</p>
-        <div className="flex items-center gap-2" role="group" aria-label="Choose a project">
-          {projects.map((item, itemIndex) => (
-            <button key={item.id} type="button" onClick={() => setActiveIndex(itemIndex)} aria-label={`Show project ${itemIndex + 1}: ${item.title}`} aria-pressed={index === itemIndex} className={`h-1.5 transition-all ${index === itemIndex ? 'w-7 bg-accent' : 'w-1.5 bg-foreground/25 hover:bg-foreground/50'}`} />
-          ))}
-        </div>
-        <div className="flex gap-2">
-          <button type="button" onClick={() => setActiveIndex(Math.max(0, index - 1))} disabled={index === 0} aria-label="Previous project" className="flex h-10 w-10 items-center justify-center border border-foreground/15 text-foreground transition-colors hover:border-foreground/40 disabled:cursor-not-allowed disabled:opacity-35"><ChevronLeft className="h-4 w-4" /></button>
-          <button type="button" onClick={() => setActiveIndex(Math.min(projects.length - 1, index + 1))} disabled={index === projects.length - 1} aria-label="Next project" className="flex h-10 w-10 items-center justify-center border border-foreground/15 text-foreground transition-colors hover:border-foreground/40 disabled:cursor-not-allowed disabled:opacity-35"><ChevronRight className="h-4 w-4" /></button>
-        </div>
+    <div className="w-full">
+      <div className="mb-4 flex justify-end gap-2">
+        <button type="button" onClick={() => scroll('left')} disabled={!canScrollLeft} aria-label="Scroll to previous projects" className="flex h-10 w-10 items-center justify-center border border-foreground/15 text-foreground transition-colors hover:border-foreground/40 disabled:cursor-not-allowed disabled:opacity-35"><ChevronLeft className="h-4 w-4" /></button>
+        <button type="button" onClick={() => scroll('right')} disabled={!canScrollRight} aria-label="Scroll to more projects" className="flex h-10 w-10 items-center justify-center border border-foreground/15 text-foreground transition-colors hover:border-foreground/40 disabled:cursor-not-allowed disabled:opacity-35"><ChevronRight className="h-4 w-4" /></button>
       </div>
+
+      <ul
+        ref={trackRef}
+        aria-label="Projects, scroll horizontally to explore"
+        tabIndex={0}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={endDrag}
+        onPointerCancel={endDrag}
+        onClickCapture={handleClickCapture}
+        onDragStart={(event) => event.preventDefault()}
+        className="project-horizontal-track flex snap-x snap-mandatory gap-5 overflow-x-auto overscroll-x-contain pb-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent sm:gap-6"
+      >
+        {projects.map((project) => {
+          const external = /^https?:\/\//.test(project.image);
+          const svg = project.image.toLowerCase().endsWith('.svg');
+
+          return (
+            <li key={project.id} className="w-[min(82vw,520px)] shrink-0 snap-start sm:w-[min(70vw,520px)]">
+              <article className="group flex h-full min-h-[540px] flex-col overflow-hidden border border-foreground/10 bg-background transition-colors hover:border-foreground/25">
+                <button type="button" onClick={() => onSelectProject(project)} aria-label={`View details for ${project.title}`} className="relative block aspect-[1.65] w-full shrink-0 overflow-hidden bg-surface-alt text-left">
+                  <Image src={project.image} alt={`Interface preview: ${project.title}`} fill sizes="(max-width: 640px) 82vw, 520px" unoptimized={external || svg} className="object-cover transition-transform duration-500 group-hover:scale-[1.025]" />
+                  <span className="absolute bottom-3 left-3 bg-background/90 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[.12em] text-foreground">{project.category}</span>
+                  <span aria-hidden="true" className="absolute bottom-3 right-3 flex h-9 w-9 items-center justify-center bg-accent text-accent-foreground"><ArrowUpRight className="h-4 w-4" /></span>
+                </button>
+
+                <div className="flex flex-1 flex-col p-5 sm:p-6">
+                  <button type="button" onClick={() => onSelectProject(project)} className="display-heading text-left text-xl font-medium leading-tight tracking-[-.025em] text-foreground transition-colors hover:text-accent sm:text-2xl">{project.title}</button>
+                  <p className="mt-3 line-clamp-3 text-sm leading-6 text-muted">{project.description}</p>
+                  <ul aria-label="Technologies used" className="mt-4 flex min-h-6 flex-wrap gap-x-3 gap-y-1 font-mono text-[10px] uppercase tracking-[.07em] text-muted/80">
+                    {project.tags.map((tag) => <li key={tag}>{tag}</li>)}
+                  </ul>
+
+                  <div className="mt-auto flex flex-col gap-4 border-t border-foreground/10 pt-4 sm:flex-row sm:items-end sm:justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border border-foreground/15">
+                        <Image src="/images/alfi-portrait.png" alt="" fill sizes="40px" className="object-cover object-[center_25%]" />
+                      </div>
+                      <div>
+                        <p className="text-xs font-semibold text-foreground">{profile.fullName || profile.name}</p>
+                        <p className="mt-0.5 text-[11px] text-muted">{profile.roleTitle}</p>
+                        <div className="mt-1.5 flex gap-2.5">
+                          {socialLinks.map(({ label, href, icon: Icon }) => <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={`${label} profile`} className="text-muted transition-colors hover:text-accent"><Icon aria-hidden="true" className="h-3.5 w-3.5" /></a>)}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-4 text-xs">
+                      {project.githubUrl && <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-foreground transition-colors hover:text-accent"><Github className="h-3.5 w-3.5" /> Source <ArrowUpRight className="h-3 w-3" /></a>}
+                      {project.liveUrl && <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-foreground transition-colors hover:text-accent"><ExternalLink className="h-3.5 w-3.5" /> Live <ArrowUpRight className="h-3 w-3" /></a>}
+                      {isAdmin && <button type="button" onClick={() => onDeleteProject(project.id)} aria-label={`Delete ${project.title}`} className="text-muted transition-colors hover:text-red-400"><Trash2 className="h-4 w-4" /></button>}
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 }
