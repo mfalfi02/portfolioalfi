@@ -4,9 +4,6 @@ import type { UserProfile } from '@/types';
 
 export default function PortfolioHero({ profile }: { profile: UserProfile }) {
   const name = profile.fullName || profile.name;
-  const nameParts = name.trim().split(/\s+/);
-  const finalNamePart = nameParts.pop() ?? name;
-  const firstNameParts = nameParts.join(' ');
   const socialLinks = [
     { label: 'GitHub', href: profile.githubUrl, icon: Github },
     { label: 'LinkedIn', href: profile.linkedinUrl, icon: Linkedin },
@@ -24,21 +21,25 @@ export default function PortfolioHero({ profile }: { profile: UserProfile }) {
       </div>
 
       <div className="section-shell my-auto flex w-full flex-col items-center py-8 text-center sm:py-10">
-        <div className="portfolio-portrait relative shrink-0">
-          <Image
-            src="/images/alfi-home-cutout.png"
-            alt={`Portrait of ${name}`}
-            fill
-            priority
-            sizes="(max-width: 640px) 140px, (max-width: 1024px) 24vw, 310px"
-            className="object-contain drop-shadow-[0_12px_18px_rgba(0,0,0,0.16)] transition-transform duration-500 hover:scale-[1.025]"
-          />
+        <div className="portfolio-portrait-stage relative flex w-full flex-col items-center">
+          <div aria-hidden="true" className="portfolio-name-marquee absolute left-1/2 top-[40%] z-0 w-screen -translate-x-1/2 overflow-hidden">
+            <div className="portfolio-name-track flex w-max">
+              {[0, 1].map((copy) => <span key={copy} className="shrink-0 px-8 font-semibold uppercase leading-none tracking-[-.065em]">{name}</span>)}
+            </div>
+          </div>
+          <div className="portfolio-portrait relative z-10 shrink-0">
+            <Image
+              src="/images/alfi-home-cutout.png"
+              alt={`Portrait of ${name}`}
+              fill
+              priority
+              sizes="(max-width: 640px) 140px, (max-width: 1024px) 24vw, 310px"
+              className="object-contain drop-shadow-[0_12px_18px_rgba(0,0,0,0.16)] transition-transform duration-500 hover:scale-[1.025]"
+            />
+          </div>
+          <h1 className="sr-only">{name}</h1>
+          <p className="mt-3 text-center text-sm tracking-wide text-foreground/85 sm:text-base">{profile.roleTitle}</p>
         </div>
-        <h1 className="portfolio-hero-title mt-5 text-center font-semibold uppercase leading-[.86] tracking-[-.075em] text-[var(--accent)]" aria-label={name}>
-          {firstNameParts && <span aria-hidden="true" className="portfolio-name-line block whitespace-nowrap">{firstNameParts}</span>}
-          <span aria-hidden="true" className="portfolio-name-line block whitespace-nowrap">{finalNamePart}</span>
-        </h1>
-        <p className="mt-3 text-center text-sm tracking-wide text-foreground/85 sm:text-base">{profile.roleTitle}</p>
       </div>
 
       <div className="section-shell grid w-full items-end gap-7 border-t border-foreground/10 pt-5 sm:grid-cols-[1fr_auto] sm:gap-10 sm:pt-6">

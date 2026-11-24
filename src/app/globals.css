@@ -70,12 +70,11 @@ section[id] { scroll-margin-top: 88px; }
 .reveal-visible { opacity: 1; transform: translateY(0); transition: opacity 650ms ease, transform 650ms cubic-bezier(.2,.65,.25,1); }
 .hero-enter { animation: hero-enter 700ms both cubic-bezier(.2,.65,.25,1); }
 @keyframes hero-enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-.portfolio-hero-title { font-family: var(--font-display); font-size: clamp(1.75rem, 6.5vw, 7rem); font-weight: 600; }
-.portfolio-name-line { animation: hero-name-in 650ms both cubic-bezier(.2,.65,.25,1); }
-.portfolio-name-line + .portfolio-name-line { animation-delay: 100ms; }
 .portfolio-portrait { width: clamp(128px, 20vw, 270px); aspect-ratio: 896 / 1160; }
+.portfolio-name-marquee { color: var(--accent); opacity: .46; }
+.portfolio-name-track { font-family: var(--font-display); font-size: clamp(3rem, 10vw, 9rem); animation: portfolio-marquee 26s linear infinite; }
+@keyframes portfolio-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .portrait-wash { background: linear-gradient(145deg, color-mix(in srgb, var(--accent) 9%, transparent), transparent 42%); }
-@keyframes hero-name-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
 @media (max-width: 640px) {
   .section-shell { width: min(100% - 36px, 1180px); }
@@ -83,7 +82,7 @@ section[id] { scroll-margin-top: 88px; }
 @media (prefers-reduced-motion: reduce) {
   .reveal-pending { opacity: 1; transform: none; }
   .hero-enter { animation: none; }
-  .portfolio-name-line { animation: none; }
+  .portfolio-name-track { animation: none; }
   .profile-project-card { animation: none; }
 }
 @media (prefers-reduced-motion: reduce) {
